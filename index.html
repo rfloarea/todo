@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
+    <title>Todo List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,7 +26,7 @@
 
         .task-list li label {
             margin-left: 5px;
-            text-decoration: none; /* Default to no decoration */
+            text-decoration: none;
             transition: color 0.3s; /* Add transition for smooth color change */
         }
 
@@ -53,7 +53,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Todo App</h1>
+        <h1>Todo List</h1>
         <input type="text" id="taskInput" placeholder="Enter task" onkeydown="handleKeyPress(event)">
         <button onclick="addTask()">Add Task</button>
 
@@ -63,7 +63,7 @@
     </div>
 
     <script>
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Create our tasks array in local storage
 
         function renderTasks() {
             const taskList = document.getElementById('taskList');
@@ -77,15 +77,15 @@
                 checkbox.id = `taskCheckbox_${index}`; // Assign unique ID to checkbox
                 checkbox.setAttribute('tabindex', 0); // Make checkbox focusable
                 checkbox.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute
-                checkbox.onchange = () => markTaskDone(index);
+                checkbox.onchange = () => markTaskDone(index); // Handle change events
                 checkbox.onkeydown = (event) => handleCheckboxKeyPress(event, index); // Handle keyboard events
                 
                 const taskLabel = document.createElement('label');
-                taskLabel.textContent = task.text; // Set task text
+                taskLabel.textContent = task.text; // Use label to display task text
                 taskLabel.htmlFor = `taskCheckbox_${index}`; // Associate label with checkbox
-                taskLabel.setAttribute('tabindex', -1); // Make label focusable
+                taskLabel.setAttribute('tabindex', -1); // Make label programmatically focusable
                 taskLabel.setAttribute('role', 'checkbox'); // Add ARIA role
-                taskLabel.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute
+                taskLabel.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute for screenreaders
                 
                 listItem.appendChild(checkbox);
                 listItem.appendChild(taskLabel);
@@ -101,39 +101,39 @@
 
         function addTask() {
             const taskInput = document.getElementById('taskInput');
-            const taskText = taskInput.value.trim();
+            const taskText = taskInput.value.trim(); // Get our input and remove any white space
 
             if (taskText) {
-                tasks.push({ text: taskText, done: false });
+                tasks.push({ text: taskText, done: false }); // Add to local storage
                 saveTasks();
                 renderTasks();
-                taskInput.value = '';
+                taskInput.value = ''; // Reset our input field to empty
             } else {
-                alert('Please enter a valid task.');
+                alert('Please enter a valid task.'); // Some light form validation
             }
         }
 
         function handleKeyPress(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter') { // Keyboard functionality on input field
                 addTask();
             }
         }
 
         function markTaskDone(index) {
-            tasks[index].done = !tasks[index].done; // Toggle task completion status
+            tasks[index].done = !tasks[index].done; // Toggle "done" property value of task
             saveTasks();
             renderTasks();
         }
 
         function deleteTask(index) {
-            tasks.splice(index, 1);
+            tasks.splice(index, 1); // Access our task via its index in local storage
             saveTasks();
             renderTasks();
         }
 
         function handleCheckboxKeyPress(event, index) {
             if (event.key === ' ' || event.key === 'Enter') { // If space key or enter key is pressed
-                event.preventDefault(); // Prevent default space bar action (e.g., scrolling)
+                event.preventDefault(); // Prevent default space bar action (scrolling)
                 markTaskDone(index); // Toggle checkbox state
             }
         }
@@ -148,8 +148,7 @@
             }
         });
 
-        // Initial rendering of tasks
-        renderTasks();
+        renderTasks(); // Initial rendering of tasks
     </script>
 </body>
 </html>
