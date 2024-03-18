@@ -26,3 +26,6 @@ Monday, March 18th 2024 @4:59pm
 The goal here is to just get a very simple little app for people to use to jot down those pesky todos that pile up. I want to experience to feel smooth, especially for keyboard-only users.
 
 I'm an aspiring keyboard-only user, but that is by choice.
+
+@6:50pm
+This is a super fun project! Low stakes, but I'm learning a ton!
