@@ -16,6 +16,34 @@
             <!-- Tasks will be added here -->
         </ul>
     </div>
+
+    <script>
+        let tasks = [];
+
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${task}`;
+                taskList.appendChild(listItem);
+            });
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const task = taskInput.value.trim();
+
+            if (task) {
+                tasks.push(task);
+                renderTasks();
+                taskInput.value = '';
+            } else {
+                alert('Please enter a valid task.');
+            }
+        }
+    </script>
     
 </body>
 </html>
