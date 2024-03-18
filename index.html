@@ -26,6 +26,14 @@
 
         .task-list li label {
             margin-left: 5px;
+            text-decoration: none; /* Default to no decoration */
+            color: black; /* Default text color */
+            transition: color 0.3s; /* Smooth transition for color change */
+        }
+
+        .task-list li input[type="checkbox"]:checked + label {
+            text-decoration: line-through; /* Strike out text when checkbox is checked */
+            color: #888; /* Lighter color when checked */
         }
 
         .task-list li button {
