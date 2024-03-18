@@ -112,7 +112,10 @@
                 checkbox.id = `taskCheckbox_${index}`; // Assign unique ID to checkbox
                 checkbox.setAttribute('tabindex', 0); // Make checkbox focusable
                 checkbox.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute
-                checkbox.onchange = () => markTaskDone(index); // Handle change events
+                checkbox.onchange = () => {
+                    handleCheckboxChange(checkbox); // Call handleCheckboxChange function when checkbox state changes
+                    markTaskDone(index);
+                }
                 checkbox.onkeydown = (event) => handleCheckboxKeyPress(event, index); // Handle keyboard events
                 
                 const taskLabel = document.createElement('label');
@@ -176,10 +179,21 @@
         function saveTasks() {
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
+        
+        let lastFocusedElement = null; // Store the last focused element so we can return to it with tab
 
+        // Event listener for the "keydown" event
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
+                // If "Escape" key is pressed, store the currently focused element
+                lastFocusedElement = document.activeElement;
                 document.activeElement.blur(); // Remove focus from the currently focused element
+            } else if (event.key === 'Tab' && lastFocusedElement !== null) {
+                // If "Tab" key is pressed and lastFocusedElement is not null,
+                // focus the last focused element again
+                lastFocusedElement.focus();
+                lastFocusedElement = null; // Clear lastFocusedElement to avoid focus loop
+                event.preventDefault(); // Prevent default tab behavior
             }
         });
 
