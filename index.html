@@ -7,6 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -26,7 +27,7 @@
 
         .task-list li label {
             margin-left: 5px;
-            text-decoration: none;
+            text-decoration: none; /* Default to no decoration */
             transition: color 0.3s; /* Add transition for smooth color change */
         }
 
@@ -49,6 +50,23 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #eee;
+        }
+
+        body.dark-mode .task-list li input[type="checkbox"]:checked + label {
+            color: #bbb; /* Change text color to a lighter shade in dark mode */
+        }
+
+        .toggle-mode {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -62,8 +80,14 @@
         </ul>
     </div>
 
+    <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)">
+        <span>Toggle Dark Mode</span>
+    </div>
+    
+
     <script>
         let tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Create our tasks array in local storage
+        let isDarkMode = false;
 
         function renderTasks() {
             const taskList = document.getElementById('taskList');
@@ -147,6 +171,23 @@
                 document.activeElement.blur(); // Remove focus from the currently focused element
             }
         });
+
+        function toggleMode() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        }
+
+        function handleModeToggleKeyPress(event) {
+            if (event.key === 'Enter') {
+                toggleMode();
+            }
+        }
+
 
         renderTasks(); // Initial rendering of tasks
     </script>
