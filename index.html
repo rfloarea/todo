@@ -24,6 +24,10 @@
             margin-bottom: 5px;
         }
 
+        .task-list li label {
+            margin-left: 5px;
+        }
+
         .task-list li button {
             margin-left: 10px;
             cursor: pointer;
@@ -58,11 +62,12 @@
                 const listItem = document.createElement('li');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
+                checkbox.checked = task.endsWith('(Done)'); // Set checkbox state based on task
                 checkbox.onchange = () => markTaskDone(index);
                 
                 const taskLabel = document.createElement('label');
-                taskLabel.textContent = task;
-                taskLabel.style.marginLeft = '5px';
+                taskLabel.textContent = task.replace('(Done)', ''); // Remove (Done) from label
+                taskLabel.htmlFor = `task_${index}`;
                 
                 listItem.appendChild(checkbox);
                 listItem.appendChild(taskLabel);
@@ -96,7 +101,12 @@
         }
 
         function markTaskDone(index) {
-            tasks[index] = tasks[index] + ' (Done)';
+            const task = tasks[index];
+            if (!task.endsWith('(Done)')) {
+                tasks[index] = task + ' (Done)';
+            } else {
+                tasks[index] = task.replace('(Done)', '');
+            }
             renderTasks();
         }
 
