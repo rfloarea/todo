@@ -56,7 +56,16 @@
 
             tasks.forEach((task, index) => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${index + 1}. ${task}`;
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.onchange = () => markTaskDone(index);
+                
+                const taskLabel = document.createElement('label');
+                taskLabel.textContent = task;
+                taskLabel.style.marginLeft = '5px';
+                
+                listItem.appendChild(checkbox);
+                listItem.appendChild(taskLabel);
                 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
@@ -84,6 +93,11 @@
             if (event.key === 'Enter') {
                 addTask();
             }
+        }
+
+        function markTaskDone(index) {
+            tasks[index] = tasks[index] + ' (Done)';
+            renderTasks();
         }
 
         function deleteTask(index) {
