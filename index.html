@@ -51,6 +51,17 @@
             cursor: pointer;
         }
 
+        /* Focus styles */
+        :focus {
+            outline: 2px solid #000; /* Black outline for better visibility in light mode */
+            outline-offset: 2px; /* Add some space between the element and the outline */
+        }
+
+        .dark-mode :focus {
+            outline-color: #fff; /* White outline for better visibility in dark mode */
+        }
+
+
         /* Dark mode styles */
         body.dark-mode {
             background-color: #333;
