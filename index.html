@@ -63,76 +63,74 @@
     </div>
 
     <script>
-        let tasks = [];
-    
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
         function renderTasks() {
             const taskList = document.getElementById('taskList');
             taskList.innerHTML = '';
-    
+
             tasks.forEach((task, index) => {
                 const listItem = document.createElement('li');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.checked = task.endsWith('(Done)'); // Set checkbox state based on task
+                checkbox.checked = task.done; // Set checkbox state based on task
                 checkbox.id = `taskCheckbox_${index}`; // Assign unique ID to checkbox
                 checkbox.setAttribute('tabindex', 0); // Make checkbox focusable
                 checkbox.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute
                 checkbox.onchange = () => markTaskDone(index);
                 checkbox.onkeydown = (event) => handleCheckboxKeyPress(event, index); // Handle keyboard events
-                    
+                
                 const taskLabel = document.createElement('label');
-                taskLabel.textContent = task.replace('(Done)', ''); // Remove (Done) from label
+                taskLabel.textContent = task.text; // Set task text
                 taskLabel.htmlFor = `taskCheckbox_${index}`; // Associate label with checkbox
                 taskLabel.setAttribute('tabindex', -1); // Make label focusable
                 taskLabel.setAttribute('role', 'checkbox'); // Add ARIA role
                 taskLabel.setAttribute('aria-checked', checkbox.checked.toString()); // Set aria-checked attribute
-                    
+                
                 listItem.appendChild(checkbox);
                 listItem.appendChild(taskLabel);
-                    
+                
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.onclick = () => deleteTask(index);
-                    
+                
                 listItem.appendChild(deleteButton);
                 taskList.appendChild(listItem);
             });
         }
-    
+
         function addTask() {
             const taskInput = document.getElementById('taskInput');
-            const task = taskInput.value.trim();
-    
-            if (task) {
-                tasks.push(task);
+            const taskText = taskInput.value.trim();
+
+            if (taskText) {
+                tasks.push({ text: taskText, done: false });
+                saveTasks();
                 renderTasks();
                 taskInput.value = '';
             } else {
                 alert('Please enter a valid task.');
             }
         }
-    
+
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 addTask();
             }
         }
-    
+
         function markTaskDone(index) {
-            const task = tasks[index];
-            if (!task.endsWith('(Done)')) {
-                tasks[index] = task + ' (Done)';
-            } else {
-                tasks[index] = task.replace('(Done)', '');
-            }
+            tasks[index].done = !tasks[index].done; // Toggle task completion status
+            saveTasks();
             renderTasks();
         }
-    
+
         function deleteTask(index) {
             tasks.splice(index, 1);
+            saveTasks();
             renderTasks();
         }
-    
+
         function handleCheckboxKeyPress(event, index) {
             if (event.key === ' ' || event.key === 'Enter') { // If space key or enter key is pressed
                 event.preventDefault(); // Prevent default space bar action (e.g., scrolling)
@@ -140,13 +138,18 @@
             }
         }
 
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 document.activeElement.blur(); // Remove focus from the currently focused element
             }
         });
+
+        // Initial rendering of tasks
+        renderTasks();
     </script>
-    
-    
 </body>
 </html>
