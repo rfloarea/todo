@@ -23,6 +23,9 @@
 
         .task-list li {
             margin-bottom: 5px;
+            border: 1px solid #ccc; /* Border around each todo item */
+            padding: 10px; /* Padding inside each todo item */
+            border-radius: 5px; /* Rounded corners for the todo item */
         }
 
         .task-list li label {
@@ -210,7 +213,7 @@
             }
         });
 
-        function toggleMode() {
+        function toggleMode() { // Dark mode toggle
             isDarkMode = !isDarkMode;
             const body = document.body;
             if (isDarkMode) {
@@ -220,7 +223,7 @@
             }
         }
 
-        function handleModeToggleKeyPress(event) {
+        function handleModeToggleKeyPress(event) { // To enable keyboard use for toggle
             if (event.key === 'Enter') {
                 toggleMode();
             }
