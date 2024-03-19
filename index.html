@@ -78,6 +78,19 @@
             right: 20px;
             cursor: pointer;
         }
+
+         /* Some light text scaling based on screen size */
+         @media screen and (max-width: 600px) {
+            body {
+                font-size: 14px; /* Decrease font size for smaller screens */
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            body {
+                font-size: 18px; /* Increase font size for larger screens */
+            }
+        }
     </style>
 </head>
 <body>
