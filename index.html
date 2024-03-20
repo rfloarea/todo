@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>to-do list</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -130,15 +130,15 @@
 </head>
 <body>
     <header>
-        <h1>Todo List</h1>
+        <h1>to-do list</h1>
         <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)">
-            <span>Toggle Dark Mode</span>
+            <span>toggle dark mode</span>
         </div>
     </header>
     <div class="container">
         <div class="input-container">
-            <input type="text" id="taskInput" placeholder="Enter task" onkeydown="handleKeyPress(event)">
-            <button id="addTask" onclick="addTask()">Add Task</button>
+            <input type="text" id="taskInput" placeholder="enter task" onkeydown="handleKeyPress(event)">
+            <button id="addTask" onclick="addTask()">add task</button>
         </div>
         
 
@@ -148,7 +148,7 @@
 
         <div class="credits">
             <p>made for you, by me ❤️</p>
-            <p>find the code hosted at <a href="https://github.com/rfloarea/todo" target="_blank">GitHub</a></p>
+            <p>find the code hosted at <a href="https://github.com/rfloarea/todo" target="_blank">github</a></p>
         </div>
     </div>
 
@@ -185,7 +185,7 @@
                 listItem.appendChild(taskLabel);
                 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
+                deleteButton.textContent = 'delete';
                 deleteButton.onclick = () => deleteTask(index);
                 
                 listItem.appendChild(deleteButton);
