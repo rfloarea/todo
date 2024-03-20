@@ -126,7 +126,7 @@
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
     <header>
         <h1>to-do list</h1>
 
@@ -148,7 +148,7 @@
 
         <div class="credits">
             <p>made for you, by me ❤️</p>
-            <p>find the code hosted at <a href="https://github.com/rfloarea/todo" target="_blank">github</a></p>
+            <p>find the code at <a href="https://github.com/rfloarea/todo" target="_blank">github</a></p>
         </div>
     </div>
 
@@ -255,7 +255,22 @@
             }
         });
 
-        let isDarkMode = false;
+        let isDarkMode = true; // Set initial state to dark mode
+
+        window.onload = function() {
+            const body = document.body;
+            const icon = document.getElementById('darkModeIcon');
+
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon'); // Remove moon icon class
+                icon.classList.add('fa-sun'); // Add sun icon class
+            } else {
+                body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun'); // Remove sun icon class
+                icon.classList.add('fa-moon'); // Add moon icon class
+            }
+        };
 
         function toggleMode() {
             isDarkMode = !isDarkMode;
@@ -273,17 +288,12 @@
             }
         }
 
-        // Initialize icon based on initial dark mode state
-        window.onload = function() {
-            const icon = document.getElementById('darkModeIcon');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon'); // Remove moon icon class
-                icon.classList.add('fa-sun'); // Add sun icon class
-            } else {
-                icon.classList.remove('fa-sun'); // Remove sun icon class
-                icon.classList.add('fa-moon'); // Add moon icon class
+        function handleModeToggleKeyPress(event) {
+            if (event.key === 'Enter') {
+                toggleMode();
             }
-        };
+        }
+
 
 
         function handleModeToggleKeyPress(event) { // To enable keyboard use for toggle
