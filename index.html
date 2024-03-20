@@ -10,10 +10,20 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        header {
+            display: flex;
+            align-items: center;
+            margin: 0px 20px;
+        }
+
         .container {
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        .input-container {
+            display: flex;
         }
 
         .task-list {
@@ -55,6 +65,10 @@
             cursor: pointer;
         }
 
+        #addTask {
+            margin-left: auto;
+        }
+
         /* Focus styles */
         :focus {
             outline: 2px solid #000; /* Black outline for better visibility in light mode */
@@ -77,10 +91,11 @@
         }
 
         .toggle-mode {
-            position: absolute;
+            margin-left: auto;
+            /* position: absolute;
             top: 20px;
             right: 20px;
-            cursor: pointer;
+            cursor: pointer; */
         }
 
          /* Some light text scaling based on screen size */
@@ -98,20 +113,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Todo List</h1>
-        <input type="text" id="taskInput" placeholder="Enter task" onkeydown="handleKeyPress(event)">
-        <button onclick="addTask()">Add Task</button>
+        <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)">
+            <span>Toggle Dark Mode</span>
+        </div>
+    </header>
+    <div class="container">
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Enter task" onkeydown="handleKeyPress(event)">
+            <button id="addTask" onclick="addTask()">Add Task</button>
+        </div>
+        
 
         <ul class="task-list" id="taskList">
             <!-- Tasks will be added here -->
         </ul>
     </div>
-
-    <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)">
-        <span>Toggle Dark Mode</span>
-    </div>
-    
 
     <script>
         let tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Create our tasks array in local storage
