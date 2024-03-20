@@ -129,9 +129,11 @@
 <body>
     <header>
         <h1>to-do list</h1>
-        <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)">
-            <span>toggle dark mode</span>
+
+        <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)" aria-label="Toggle dark mode" role="button" aria-pressed="false">
+            <i class="fas" id="darkModeIcon"></i>
         </div>
+        
     </header>
     <div class="container">
         <div class="input-container">
@@ -152,7 +154,6 @@
 
     <script>
         let tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Create our tasks array in local storage
-        let isDarkMode = false;
 
         function renderTasks() {
             const taskList = document.getElementById('taskList');
@@ -254,22 +255,42 @@
             }
         });
 
-        function toggleMode() { // Dark mode toggle
+        let isDarkMode = false;
+
+        function toggleMode() {
             isDarkMode = !isDarkMode;
             const body = document.body;
+            const icon = document.getElementById('darkModeIcon');
+
             if (isDarkMode) {
                 body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon'); // Remove moon icon class
+                icon.classList.add('fa-sun'); // Add sun icon class
             } else {
                 body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun'); // Remove sun icon class
+                icon.classList.add('fa-moon'); // Add moon icon class
             }
         }
+
+        // Initialize icon based on initial dark mode state
+        window.onload = function() {
+            const icon = document.getElementById('darkModeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon'); // Remove moon icon class
+                icon.classList.add('fa-sun'); // Add sun icon class
+            } else {
+                icon.classList.remove('fa-sun'); // Remove sun icon class
+                icon.classList.add('fa-moon'); // Add moon icon class
+            }
+        };
+
 
         function handleModeToggleKeyPress(event) { // To enable keyboard use for toggle
             if (event.key === 'Enter') {
                 toggleMode();
             }
         }
-
 
         renderTasks(); // Initial rendering of tasks
     </script>
