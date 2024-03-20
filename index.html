@@ -70,13 +70,6 @@
             margin-left: auto;
         }
 
-        .credits {
-            position: absolute; /* Position the icon */
-            bottom: 20px; /* Distance from the bottom */
-            left: 20px; /* Distance from the right */
-            font-size: 14px; /* Icon size */
-        }
-
         /* Focus styles */
         :focus {
             outline: 2px solid #000; /* Black outline for better visibility in light mode */
@@ -109,14 +102,11 @@
 
         .toggle-mode {
             margin-left: auto;
-            /* position: absolute;
-            top: 20px;
-            right: 20px; */
             cursor: pointer;
         }
 
-         /* Some light text scaling based on screen size */
-         @media screen and (max-width: 600px) {
+        /* Some light text scaling based on screen size */
+        @media screen and (max-width: 600px) {
             body {
                 font-size: 14px; /* Decrease font size for smaller screens */
             }
@@ -126,6 +116,13 @@
             body {
                 font-size: 18px; /* Increase font size for larger screens */
             }
+        }
+
+        .credits {
+            padding: 20px;
+            font-size: 14px;
+            text-align: center; /* Center text horizontally */
+            margin-top: auto; /* Push footer to the bottom */
         }
     </style>
 </head>
