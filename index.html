@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>to-do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -185,7 +186,10 @@
                 listItem.appendChild(taskLabel);
                 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'delete';
+                deleteButton.classList.add('delete-button'); // Add a class to style the button
+                const icon = document.createElement('i'); // Create an icon element (i tag)
+                icon.classList.add('fas', 'fa-trash-alt'); // Add Font Awesome classes for the trash icon
+                deleteButton.appendChild(icon); // Append icon to the button
                 deleteButton.onclick = () => deleteTask(index);
                 
                 listItem.appendChild(deleteButton);
