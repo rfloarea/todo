@@ -69,6 +69,13 @@
             margin-left: auto;
         }
 
+        .credits {
+            position: absolute; /* Position the icon */
+            bottom: 20px; /* Distance from the bottom */
+            right: 20px; /* Distance from the right */
+            font-size: 14px; /* Icon size */
+        }
+
         /* Focus styles */
         :focus {
             outline: 2px solid #000; /* Black outline for better visibility in light mode */
@@ -79,23 +86,32 @@
             outline-color: #fff; /* White outline for better visibility in dark mode */
         }
 
-
         /* Dark mode styles */
         body.dark-mode {
             background-color: #333;
             color: #eee;
         }
 
-        body.dark-mode .task-list li input[type="checkbox"]:checked + label {
+        body.dark-mode .task-list li .credits input[type="checkbox"]:checked + label {
             color: #bbb; /* Change text color to a lighter shade in dark mode */
+        }
+
+        /* Light mode link color */
+        a {
+            color: #007bff; /* Default link color */
+        }
+
+        /* Dark mode link color */
+        body.dark-mode a {
+            color: #64a6e7; /* Adjusted link color for dark mode */
         }
 
         .toggle-mode {
             margin-left: auto;
             /* position: absolute;
             top: 20px;
-            right: 20px;
-            cursor: pointer; */
+            right: 20px; */
+            cursor: pointer;
         }
 
          /* Some light text scaling based on screen size */
@@ -129,6 +145,11 @@
         <ul class="task-list" id="taskList">
             <!-- Tasks will be added here -->
         </ul>
+
+        <div class="credits">
+            <p>made for you, by me ❤️</p>
+            <p>find the code hosted at <a href="https://github.com/rfloarea/todo" target="_blank">GitHub</a></p>
+        </div>
     </div>
 
     <script>
