@@ -129,23 +129,18 @@
 <body class="dark-mode">
     <header>
         <h1>to-do list</h1>
-
         <div class="toggle-mode" onclick="toggleMode()" tabindex="0" onkeydown="handleModeToggleKeyPress(event)" aria-label="Toggle dark mode" role="button" aria-pressed="false">
             <i class="fas" id="darkModeIcon"></i>
         </div>
-        
     </header>
     <div class="container">
         <div class="input-container">
             <input type="text" id="taskInput" placeholder="enter task" onkeydown="handleKeyPress(event)">
             <button id="addTask" onclick="addTask()">add task</button>
         </div>
-        
-
         <ul class="task-list" id="taskList">
             <!-- Tasks will be added here -->
         </ul>
-
         <div class="credits">
             <p>made for you, by me ❤️</p>
             <p>find the code at <a href="https://github.com/rfloarea/todo" target="_blank">github</a></p>
@@ -287,14 +282,6 @@
                 icon.classList.add('fa-moon'); // Add moon icon class
             }
         }
-
-        function handleModeToggleKeyPress(event) {
-            if (event.key === 'Enter') {
-                toggleMode();
-            }
-        }
-
-
 
         function handleModeToggleKeyPress(event) { // To enable keyboard use for toggle
             if (event.key === 'Enter') {
